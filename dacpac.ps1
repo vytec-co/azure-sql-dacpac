@@ -31,17 +31,17 @@ $srv = new-object Microsoft.SqlServer.Management.Smo.Server($conn)
 
 Write-Host $srv.Information.Version
 
-$db = New-Object Microsoft.SqlServer.Management.Smo.Database($srv, "{database name}") 
+$dbname = New-Object Microsoft.SqlServer.Management.Smo.Database($srv, "{database name}") 
  
 
 
 
 ## Set a SMO Server object to the default instance on the local computer.  
-CD SQLSERVER:\SQL\localhost\DEFAULT  
-$srv = get-item .  
+# CD SQLSERVER:\SQL\localhost\DEFAULT  
+# $srv = get-item .  
   
 ## Specify the database to extract to a DAC.  
-$dbname = "MyDB"  
+# $dbname = "MyDB"  
   
 ## Specify the DAC metadata.  
 $applicationname = "MyApplication"  
@@ -56,5 +56,5 @@ $extractionunit = New-Object Microsoft.SqlServer.Management.Dac.DacExtractionUni
 $extractionunit.Description = $description  
 $extractionunit.Extract($dacpacPath)
 
-$srv.KillAllProcesses($db)
-$srv.databases[$db.Name].drop()
+$srv.KillAllProcesses($dbname)
+$srv.databases[$dbname.Name].drop()
